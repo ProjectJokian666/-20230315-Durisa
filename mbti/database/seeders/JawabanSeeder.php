@@ -15,9 +15,9 @@ class JawabanSeeder extends Seeder
      */
     public function run()
     {
-        Jawaban::create(['jawabans' => 'D1','bobot' => "['E','I']",'beban' => '12,5',]);
-        Jawaban::create(['jawabans' => 'D2','bobot' => "['S','N']",'beban' => '12,5',]);
-        Jawaban::create(['jawabans' => 'D3','bobot' => "['T','F']",'beban' => '12,5',]);
-        Jawaban::create(['jawabans' => 'D4','bobot' => "['J','P']",'beban' => '12,5',]);
+        Jawaban::create(['jawabans' => 'D1','bobot' => "E,I",'beban' => '12,5',]);
+        Jawaban::create(['jawabans' => 'D2','bobot' => "S,N",'beban' => '12,5',]);
+        Jawaban::create(['jawabans' => 'D3','bobot' => "T,F",'beban' => '12,5',]);
+        Jawaban::create(['jawabans' => 'D4','bobot' => "J,P",'beban' => '12,5',]);
     }
 }

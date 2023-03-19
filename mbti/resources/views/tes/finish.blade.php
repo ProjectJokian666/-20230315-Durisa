@@ -6,23 +6,16 @@
                     <p class="card-title">HASIL TES ANDA ADALAH</p>
                 </div>
                 <div class="card-footer">
-                    <div class="row">
-                        <div class="col-12">
-                            <input type="radio" id="d411" name="d41" value="1">
-                            <label for="d411">Sangat Tidak Setuju</label>
+                    <div id="hasil-ada">
+                        <img src="" class="card-img-top" alt="" id="hasilimg">
+                        <div class="card-body">
+                            <h5 class="card-title" id="hasiltype"></h5>
+                            <p class="card-text" id="hasilkep"></p>
+                            <p class="card-text" id="hasildes"></p>
                         </div>
-                        <div class="col-12">
-                            <input type="radio" id="d412" name="d41" value="2">
-                            <label for="d412">Tidak Setuju</label>
-                        </div>
-                        <div class="col-12">
-                            <input type="radio" id="d413" name="d41" value="3">
-                            <label for="d413">Setuju</label>
-                        </div>
-                        <div class="col-12">
-                            <input type="radio" id="d414" name="d41" value="4">
-                            <label for="d414">Sangat Setuju</label>
-                        </div>
+                    </div>
+                    <div id="hasil-belum">
+                        <p class="card-text"> HASIL BELUM BISA DITAMPILKAN </p>
                     </div>
                 </div>
             </div>
@@ -31,16 +24,56 @@
 </div>
 @push('jss')
 <script>
-    $(document).on('click','#b_d4',function() {
-        // d_d4=d_d4+1;
-        // console.log(d_d1);
-        document.body.scrollTop=0;
-        document.documentElement.scrollTop = 0;
-        $('#l_d1').hide();
-        $('#l_d2').hide();
-        $('#l_d3').hide();
-        $('#l_d4').hide();
-        console.log(d_d1,d_d2,d_d3,d_d4);
-    })
+    $('#hasil-ada').hide();
+    $('#hasil-belum').hide();
+
+    setInterval(function(){
+        if ($('#l_d5').hide()) {
+            $('#l_d5').show();
+        }
+        $('#hasil-ada').show();
+        hasil()
+    },1000);
+
+    function hasil() {
+        $.ajax({
+            type:"GET",
+            url:"{{route('hasil')}}",
+            success:function(data){
+                if (data!="kosong") {
+                    // const data_image = $('#hasilimg').attr('src');
+                    // const data_type = $('#hasiltype').html();
+                    // const data_kep = $('#hasilkep').html();
+                    // const data_des = $('#hasildes').html();
+                    // console.log('if');
+                    // console.log($('#hasilimg').attr('src'));
+                    // console.log($('#hasilimg').attr('src',"{{asset('images')}}"+"/"+data.gambar));
+                    if ($('#hasilimg').attr('src')!="{{asset('images')}}"+"/"+data.gambar) {
+                        // console.log($('#hasiltype').html());
+                        $('#hasilimg').attr('src','');
+                        $('#hasilimg').attr('src',"{{asset('images')}}"+"/"+data.gambar);
+                    }
+                    if ($('#hasiltype').html()!="<b>"+data.type+"</b>") {
+                        // console.log($('#hasiltype').html());
+                        $('#hasiltype').empty();
+                        $('#hasiltype').append("<b>"+data.type+"</b>");
+                    }
+                    if ($('#hasilkep').html()!="<b>"+data.kepribadian+"</b>") {
+                        $('#hasilkep').empty();
+                        $('#hasilkep').append("<b>"+data.kepribadian+"</b>");
+                    }
+                    if ($('#hasildes').html()!="<b>"+data.deskripsi+"</b>") {
+                        $('#hasildes').empty();
+                        $('#hasildes').append("<b>"+data.deskripsi+"</b>");
+                    }
+                    // console.log('endif');
+                    // console.log(data_type);
+                    // console.log($('#hasiltype').html())
+                    // console.log(data.type);
+                    // console.log(data);
+                }
+            }
+        })
+    }
 </script>
 @endpush

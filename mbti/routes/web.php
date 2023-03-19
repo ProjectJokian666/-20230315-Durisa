@@ -22,9 +22,9 @@ use App\Http\Controllers\UserController as User;
 Route::get('/',[Index::class,'index'])->name('index');
 Route::get('index',[Index::class,'index'])->name('index');
 Route::get('tipekepribadian',[Kepribadian::class,'tipekepribadian'])->name('tipekepribadian');
+Route::get('aboutmbti',[About::class,'aboutmbti'])->name('aboutmbti');
 
 Route::middleware(['guest'])->group(function(){
-	Route::get('aboutmbti',[About::class,'aboutmbti'])->name('aboutmbti');
 
 	Route::get('login',[Login::class,'login'])->name('login');
 	Route::post('p_login',[Login::class,'p_login'])->name('p_login');
@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function(){
 	//user
 	Route::get('user',[User::class,'user'])->name('user');
 	Route::get('teskepribadian',[Kepribadian::class,'teskepribadian'])->name('teskepribadian');
-	Route::get('pkepribadian',[Kepribadian::class,'pkepribadian'])->name('pkepribadian');
+	Route::post('pkepribadian',[Kepribadian::class,'pkepribadian'])->name('pkepribadian');
+	Route::get('hasil',[Kepribadian::class,'hasil'])->name('hasil');
 
 	Route::get('logout',[Login::class,'logout'])->name('logout');
 });

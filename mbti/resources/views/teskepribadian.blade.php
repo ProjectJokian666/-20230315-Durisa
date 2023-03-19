@@ -47,19 +47,10 @@
 </div>
 <!-- end item section -->
 @endsection
-<?php 
-$kondisi=false;
-if($data['kon']!=null){
-    $kondisi = true;
-}
-else{
-    $kondisi = false;
-}
-?>
 @push('jss')
 <script>
-    // console.log(json_encode($data['kon']));
-    if (kondisi) {
+    var situasi = "<?php echo $data['isi']; ?>";
+    if (situasi) {
         $('#l_d1').show();
         $('#l_d2').hide();
         $('#l_d3').hide();

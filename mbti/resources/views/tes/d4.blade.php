@@ -195,7 +195,7 @@
         document.documentElement.scrollTop = 0;
 
         $.ajax({
-            type:"GET",
+            type:"POST",
             data:{
                 d_d1:d_d1,
                 d_d2:d_d2,
@@ -205,7 +205,7 @@
             },
             url:"{{route('pkepribadian')}}",
             success:function(){
-                console.log('ok');
+                // console.log('ok');
             }
         })
 
