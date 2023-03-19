@@ -28,11 +28,24 @@
     $('#hasil-belum').hide();
 
     setInterval(function(){
-        if ($('#l_d5').hide()) {
-            $('#l_d5').show();
-        }
-        $('#hasil-ada').show();
-        hasil()
+        $.ajax({
+            type:"GET",
+            url:"{{route('cek')}}",
+            success:function(data){
+                if (data=="true") {
+                    if ($('#l_d5').hide()) {
+                        $('#l_d5').show();
+                    }
+                    $('#hasil-ada').show();
+                    hasil()
+                    // console.log('ya')
+                }
+                else{
+                    $('#l_d5').hide();
+                    // console.log('tidak')
+                }
+            }
+        });
     },1000);
 
     function hasil() {

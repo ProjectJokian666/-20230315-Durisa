@@ -38,12 +38,12 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('admin',[Admin::class,'admin'])->name('admin');
 	Route::get('tesrekap',[Admin::class,'tesrekap'])->name('tesrekap');
 
-
 	//user
 	Route::get('user',[User::class,'user'])->name('user');
 	Route::get('teskepribadian',[Kepribadian::class,'teskepribadian'])->name('teskepribadian');
 	Route::post('pkepribadian',[Kepribadian::class,'pkepribadian'])->name('pkepribadian');
 	Route::get('hasil',[Kepribadian::class,'hasil'])->name('hasil');
+	Route::get('cek',[Kepribadian::class,'cek'])->name('cek');
 
 	Route::get('logout',[Login::class,'logout'])->name('logout');
 });

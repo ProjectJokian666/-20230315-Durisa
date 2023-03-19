@@ -81,4 +81,15 @@ class KepribadianController extends Controller
         }
         return response()->json('kosong',200);
     }
+
+    public function cek()
+    {
+        $data = Hasil::where('id_users','=',Auth()->User()->id_user)->first();
+        if ($data!=null) {
+            return response()->json('true',200);
+        }
+        else{
+            return response()->json('false',200);
+        }
+    }
 }

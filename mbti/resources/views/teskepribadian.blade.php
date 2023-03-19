@@ -51,22 +51,22 @@
 <script>
     var situasi = "<?php echo $data['isi']; ?>";
     if (situasi) {
-        $('#l_d1').show();
+        $('#l_d1').hide();
         $('#l_d2').hide();
         $('#l_d3').hide();
         $('#l_d4').hide();
-        $('#l_d5').hide();
+        $('#l_d5').show();
         let d_d1 = 0;
         let d_d2 = 0;
         let d_d3 = 0;
         let d_d4 = 0;
     }
     else{
-        $('#l_d1').hide();
+        $('#l_d1').show();
         $('#l_d2').hide();
         $('#l_d3').hide();
         $('#l_d4').hide();
-        $('#l_d5').show();
+        $('#l_d5').hide();
         let d_d1 = 0;
         let d_d2 = 0;
         let d_d3 = 0;
