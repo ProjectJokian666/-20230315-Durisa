@@ -6,6 +6,7 @@ use App\Http\Controllers\AboutController as About;
 use App\Http\Controllers\KepribadianController as Kepribadian;
 use App\Http\Controllers\LoginController as Login;
 
+use App\Http\Controllers\SuperAdminController as SuperAdmin;
 use App\Http\Controllers\AdminController as Admin;
 use App\Http\Controllers\UserController as User;
 
@@ -34,6 +35,9 @@ Route::middleware(['guest'])->group(function(){
 });
 
 Route::middleware(['auth'])->group(function(){
+	//superadmin
+	Route::get('Superadmin',[SuperAdmin::class,'Superadmin'])->name('Superadmin');
+
 	//admin
 	Route::get('admin',[Admin::class,'admin'])->name('admin');
 	Route::get('tesrekap',[Admin::class,'tesrekap'])->name('tesrekap');
