@@ -29,7 +29,7 @@ class AdminController extends Controller
             if (request()->ajax()) {
                 return DataTables::of($data)->make(true);
             }
-            return view('tesrekap');
+            return view('v_admin.tesrekap');
         }
         return redirect('/');
     }

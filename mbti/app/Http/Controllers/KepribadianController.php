@@ -12,8 +12,8 @@ class KepribadianController extends Controller
 {
     public function teskepribadian()
     {   
-        if (Auth()->User()->role=='Admin') {
-            return redirect('admin');
+        if (Auth()->User()->role!='User') {
+            return redirect('index');
         }
         $isi = Hasil::where('id_users','=',Auth()->User()->id_user)->first();
         if ($isi) {
@@ -28,7 +28,7 @@ class KepribadianController extends Controller
         ];
 
         // dd($data);
-        return view('teskepribadian',compact('data'));
+        return view('v_user.teskepribadian',compact('data'));
     }
     public function pkepribadian(Request $request)
     {   

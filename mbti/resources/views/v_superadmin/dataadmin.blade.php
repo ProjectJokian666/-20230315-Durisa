@@ -17,15 +17,21 @@
     <div class="container">
         <div class="heading_container">
             <h2>
-                REKAP DATA TES
+                DATA AKUN ADMIN
             </h2>
+            <div class="ml-auto">
+                <a href="{{url('addadmin')}}" class="btn btn-sm btn-dark">
+                    TAMBAH
+                </a>
+            </div>
         </div>
         <div class="item_container mt-5">
-            <table class="table-sm text-center" cellpadding="0" id="hasilrekap" width="100%">
+            <table class="table-sm text-center" cellpadding="0" id="data" width="100%">
                 <thead>
                     <th>No</th>
                     <th>Nama</th>
-                    <th>Hasil</th>
+                    <th>Email</th>
+                    <th>Aksi</th>
                 </thead>
             </table>
         </div>
@@ -40,11 +46,11 @@
 <link  href="{{asset('asset/datatables/jquery.dataTables.min.css')}}" rel="stylesheet">
 <script>
     $(document).ready(function(){
-      $('#hasilrekap').DataTable({
+      $('#data').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-            url : "{{url('tesrekap')}}"
+            url : "{{url('dataadmin')}}"
         },
         columns: [
         { 
@@ -53,8 +59,16 @@
                 return meta.row + meta.settings._iDisplayStart+1
             } 
         },
-        { data: 'id_users', name: 'id_users' },
-        { data: 'jawaban', name: 'jawaban' },
+        { data: 'name', name: 'name' },
+        { data: 'email', name: 'email' },
+        { 
+            data: null,
+            render:function(data,type,row,meta){
+                return ''+
+                '<a href="{{url("dataadmin")}}'+"/ubah/"+data.id_user+'" class="btn btn-sm btn-info">UBAH</a>'+
+                '<a href="{{url("dataadmin")}}'+"/hapus/"+data.id_user+'" class="btn btn-sm btn-danger">HAPUS</a>';
+            } 
+        },
         ]
     });  
   })

@@ -25,13 +25,19 @@ class LoginController extends Controller
 		if ($data==null) {
 			if (Auth::check()) {
 				Auth::logout();
-			} 
-			elseif (Auth::check()) {
-				Auth::logout();
 			}
 			return redirect('login');	
 		}
-		if ($data->role=='Admin') {
+		if ($data->role=='SuperAdmin') {
+			// dd(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'role'=>'Admin']));
+			if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'role'=>'SuperAdmin'])){
+				$request->session()->regenerate();
+				return redirect()->intended('superadmin');
+			}
+			Auth::logout();
+			return 'login-admin';
+		}
+		elseif ($data->role=='Admin') {
 			// dd(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'role'=>'Admin']));
 			if(Auth::attempt(['email'=>$request->email,'password'=>$request->password,'role'=>'Admin'])){
 				$request->session()->regenerate();
@@ -75,9 +81,10 @@ class LoginController extends Controller
     	// dd($request);
 		$request->validate([
 			'name' => 'required|max:255',
-			'email' => 'required|email:dns|unique:users',
+			'email' => 'required|unique:users',
 			'password' => 'required|max:255',
 		]);
+
 		$data = User::create([
 			'name' =>$request->name,
 			'email' =>$request->email,

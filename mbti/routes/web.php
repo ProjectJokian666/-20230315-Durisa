@@ -10,6 +10,8 @@ use App\Http\Controllers\SuperAdminController as SuperAdmin;
 use App\Http\Controllers\AdminController as Admin;
 use App\Http\Controllers\UserController as User;
 
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,7 +38,10 @@ Route::middleware(['guest'])->group(function(){
 
 Route::middleware(['auth'])->group(function(){
 	//superadmin
-	Route::get('Superadmin',[SuperAdmin::class,'Superadmin'])->name('Superadmin');
+	Route::get('superadmin',[SuperAdmin::class,'superadmin'])->name('superadmin');
+	Route::get('dataadmin',[SuperAdmin::class,'dataadmin'])->name('dataadmin');
+	Route::get('addadmin',[SuperAdmin::class,'addadmin'])->name('addadmin');
+	Route::post('paddadmin',[SuperAdmin::class,'paddadmin'])->name('paddadmin');
 
 	//admin
 	Route::get('admin',[Admin::class,'admin'])->name('admin');

@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.css')}}" />
 
     <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet"> -->
     <!-- Custom styles for this template -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet" />
     <!-- responsive style -->

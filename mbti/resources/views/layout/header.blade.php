@@ -21,6 +21,11 @@
                         </li>
                         @auth
                         <?php 
+                        if (Auth()->User()->role=='SuperAdmin') { ?>    
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('dataadmin')}}">Data Admin</a>
+                            </li>
+                        <?php }
                         if (Auth()->User()->role=='Admin') { ?>    
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('tesrekap')}}">Rekap Tes</a>
