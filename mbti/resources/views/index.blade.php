@@ -29,7 +29,15 @@
                                         MBTI dapat membantumu untuk menemukan tipe kepribadianmu, satu dari enam belas jenis kepribadian. Cari tahu kepribadianmu dan gali potensimu!
                                     </p>
                                     <div>
+                                        @auth
+                                        @if(Auth()->User()->role=='User')
                                         <a href="{{url('teskepribadian')}}">Ambil Tes</a>
+                                        @elseif(Auth()->User()->role=='Admin')
+                                        <a href="{{url('tesrekap')}}">Tes Rekap</a>
+                                        @endif
+                                        @else
+                                        <a href="{{url('teskepribadian')}}">Ambil Tes</a>
+                                        @endauth
                                     </div>
                                 </div>
                             </div>

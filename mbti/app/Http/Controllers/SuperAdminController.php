@@ -8,6 +8,7 @@ use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class SuperAdminController extends Controller
 {   
@@ -63,5 +64,61 @@ class SuperAdminController extends Controller
         ]);
         // dd($data);
         return redirect('dataadmin');
+    }
+    public function ubahdataadmin($id)
+    {
+        if (Auth()->User()->role!='SuperAdmin') {
+            return redirect('index');
+        }
+        $data = [
+            'user' => User::find($id),
+        ];
+        return view('v_superadmin.update',compact('data'));
+    }
+    public function pubahdataadmin(Request $request,$id)
+    {
+        // dd($request);
+        if ($request->name!=null&&$request->email!=null) {
+            if ($request->password==null) {
+                $ubah_data = User::where('id_user',$id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+                if ($ubah_data) {
+                    return redirect('dataadmin/ubah/'.$id)->with('sukses','data sudahh diubah');
+                }
+                else{
+                    return redirect('dataadmin/ubah/'.$id)->with('gagal','data gagal diubah');
+                }
+            }
+            if ($request->password!=null) {
+                $ubah_data = User::where('id_user',$id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                if ($ubah_data) {
+                    return redirect('dataadmin/ubah/'.$id)->with('sukses','data sudahh diubah');
+                }
+                else{
+                    return redirect('dataadmin/ubah/'.$id)->with('gagal','data gagal diubah');
+                }
+            }
+
+        }
+        else{
+            return redirect('dataadmin/ubah/'.$id);
+        }
+    }
+    public function deletedataadmin($id)
+    {
+        $delete_user = User::where('id_user','=',$id)->delete();
+        DB::statement('alter table users auto_increment=0');
+        if ($delete_user) {
+            return redirect('dataadmin')->with('sukses','data sudahh dihapus');
+        }
+        else{
+            return redirect('dataadmin')->with('gagal','data gagal dihapus');
+        }
     }
 }

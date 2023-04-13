@@ -42,6 +42,9 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('dataadmin',[SuperAdmin::class,'dataadmin'])->name('dataadmin');
 	Route::get('addadmin',[SuperAdmin::class,'addadmin'])->name('addadmin');
 	Route::post('paddadmin',[SuperAdmin::class,'paddadmin'])->name('paddadmin');
+	Route::get('dataadmin/ubah/{id}',[SuperAdmin::class,'ubahdataadmin'])->name('ubahdataadmin');
+	Route::post('dataadmin/ubah/{id}',[SuperAdmin::class,'pubahdataadmin'])->name('pubahdataadmin');
+	Route::get('dataadmin/hapus/{id}',[SuperAdmin::class,'deletedataadmin'])->name('deletedataadmin');
 
 	//admin
 	Route::get('admin',[Admin::class,'admin'])->name('admin');
@@ -54,6 +57,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('hasil',[Kepribadian::class,'hasil'])->name('hasil');
 	Route::get('cek',[Kepribadian::class,'cek'])->name('cek');
 
+	Route::get('profil',[Login::class,'profil'])->name('profil');
+	Route::post('profil',[Login::class,'profil'])->name('pprofil');
 	Route::get('logout',[Login::class,'logout'])->name('logout');
 });
 

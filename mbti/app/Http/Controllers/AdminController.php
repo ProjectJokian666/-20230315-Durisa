@@ -12,7 +12,7 @@ class AdminController extends Controller
 {
     public function admin()
     {
-    	return view('admin');
+    	return view('v_admin.admin');
     }
 
     public function tesrekap()

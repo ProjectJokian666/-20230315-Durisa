@@ -16,9 +16,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('tipekepribadian')}}">Tipe Kepribadian</a>
                         </li>
+                        @guest
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('aboutmbti')}}">About</a>
                         </li>
+                        @endguest
                         @auth
                         <?php 
                         if (Auth()->User()->role=='SuperAdmin') { ?>    
@@ -26,7 +28,7 @@
                                 <a class="nav-link" href="{{url('dataadmin')}}">Data Admin</a>
                             </li>
                         <?php }
-                        if (Auth()->User()->role=='Admin') { ?>    
+                        if (Auth()->User()->role=='Admin') { ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('tesrekap')}}">Rekap Tes</a>
                             </li>
@@ -37,6 +39,9 @@
                             </li>
                         <?php }
                         ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('profil')}}">Profil</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('logout')}}">Logout</a>
                         </li>

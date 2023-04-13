@@ -93,9 +93,92 @@ class LoginController extends Controller
 		// dd($data);
 		return view('login');
 	}
+	
+	public function profil(Request $request)
+	{	
+		// dd(isset($request));
+		if ($request->name!=null&&$request->email!=null) {
+
+			$cek_email = User::where('email','=',$request->email)->first();
+			if($cek_email->email==null||$request->email==Auth()->user()->email){
+				if ($request->password==null) {
+					$ubah_data = User::where('id_user',Auth()->user()->id_user)->update([
+						'name' => $request->name,
+						'email' => $request->email,
+					]);
+					// dd($ubah_data,Auth()->user()->id_user);
+					if ($ubah_data) {
+						$kirim_data = [
+							'email' => $request->email,
+							'password' => Auth()->user()->password,
+						];
+						$this->getlogin($kirim_data);
+						return redirect('profil')->with('sukses','data profil sudahh diubah');
+					}
+					else{
+						return redirect('profil')->with('gagal','data profil gagal diubah');
+					}
+					// dd($cek_email,$request->email==Auth()->user()->email,$request->password==null);
+				}
+				if ($request->password!=null) {
+					$ubah_data = User::where('id_user',Auth()->user()->id_user)->update([
+						'name' => $request->name,
+						'email' => $request->email,
+						'password' => Hash::make($request->password),
+					]);
+					// dd($ubah_data,Auth()->user()->id_user);
+					if ($ubah_data) {
+						$kirim_data = [
+							'email' => $request->email,
+							'password' => $request->password,
+						];
+						$this->getlogin($kirim_data);
+						return redirect('profil')->with('sukses','data profil sudahh diubah');
+					}
+					else{
+						return redirect('profil')->with('gagal','data profil gagal diubah');
+					}
+				}
+			}
+			else{
+				return redirect('profil')->with('gagal','email sudah ada yang menggunakan');
+			}
+
+			dd($request);
+		}
+		else{
+			return view('profil');
+		}
+	}
+
 	public function logout()
 	{
 		Auth::logout();
+		request()->session()->invalidate();
+		request()->session()->regenerateToken();
 		return redirect('login');
+	}
+
+	public function getlogin($data)
+	{
+		// dd($data['email']);
+		$data = User::where('email',$data['email'])->first();
+
+		if ($data->role=='SuperAdmin') {
+			if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'role'=>'SuperAdmin'])){
+				$data->session()->regenerate();
+			}
+		}
+		elseif ($data->role=='Admin') {
+			if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'role'=>'Admin'])){
+				$data->session()->regenerate();
+			}
+		}
+		elseif($data->role=='User'){
+			if(Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'role'=>'User'])){
+				$data->session()->regenerate();
+			}
+		}
+			// dd($data);
 	}
 }
