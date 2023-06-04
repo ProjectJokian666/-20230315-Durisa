@@ -39,6 +39,7 @@ Route::middleware(['guest'])->group(function(){
 Route::middleware(['auth'])->group(function(){
 	//superadmin
 	Route::get('superadmin',[SuperAdmin::class,'superadmin'])->name('superadmin');
+
 	Route::get('dataadmin',[SuperAdmin::class,'dataadmin'])->name('dataadmin');
 	Route::get('addadmin',[SuperAdmin::class,'addadmin'])->name('addadmin');
 	Route::post('paddadmin',[SuperAdmin::class,'paddadmin'])->name('paddadmin');
@@ -48,6 +49,14 @@ Route::middleware(['auth'])->group(function(){
 
 	//admin
 	Route::get('admin',[Admin::class,'admin'])->name('admin');
+
+	Route::get('data',[Admin::class,'data'])->name('data');
+	Route::get('add',[Admin::class,'add'])->name('add');
+	Route::post('padd',[Admin::class,'padd'])->name('padd');
+	Route::get('data/ubah/{id}',[Admin::class,'ubahdata'])->name('ubahdata');
+	Route::post('data/ubah/{id}',[Admin::class,'pubahdata'])->name('pubahdata');
+	Route::get('data/hapus/{id}',[Admin::class,'deletedata'])->name('deletedata');
+
 	Route::get('tesrekap',[Admin::class,'tesrekap'])->name('tesrekap');
 
 	//user
@@ -55,6 +64,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('teskepribadian',[Kepribadian::class,'teskepribadian'])->name('teskepribadian');
 	Route::post('pkepribadian',[Kepribadian::class,'pkepribadian'])->name('pkepribadian');
 	Route::get('hasil',[Kepribadian::class,'hasil'])->name('hasil');
+	Route::get('cetak',[Kepribadian::class,'cetak'])->name('cetak');
 	Route::get('cek',[Kepribadian::class,'cek'])->name('cek');
 
 	Route::get('profil',[Login::class,'profil'])->name('profil');

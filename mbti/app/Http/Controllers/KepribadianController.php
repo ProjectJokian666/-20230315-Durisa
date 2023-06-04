@@ -92,4 +92,11 @@ class KepribadianController extends Controller
             return response()->json('false',200);
         }
     }
+    public function cetak()
+    {
+        if (Auth()->User()->role!='User') {
+            return redirect('index');
+        }
+        return view('v_user.cetak');
+    }
 }

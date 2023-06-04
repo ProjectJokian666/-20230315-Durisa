@@ -24,11 +24,6 @@
                                     </h2>
                                     <h1>
                                         Pribadimu
-                                        @auth
-                                        {{Auth()->User()->name}}
-                                        @else
-                                        Gak
-                                        @endauth
                                     </h1>
                                     <p>
                                         MBTI dapat membantumu untuk menemukan tipe kepribadianmu, satu dari enam belas jenis kepribadian. Cari tahu kepribadianmu dan gali potensimu!

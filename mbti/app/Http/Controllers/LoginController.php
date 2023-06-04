@@ -96,11 +96,13 @@ class LoginController extends Controller
 	
 	public function profil(Request $request)
 	{	
-		// dd(isset($request));
+		// dd(isset($request),$request);
 		if ($request->name!=null&&$request->email!=null) {
 
 			$cek_email = User::where('email','=',$request->email)->first();
-			if($cek_email->email==null||$request->email==Auth()->user()->email){
+
+			// dd(isset($request),$cek_email,$cek_email==null,$request->email==Auth()->user()->email,$request->email!=Auth()->user()->email);
+			if($cek_email==null||$request->email==Auth()->user()->email){
 				if ($request->password==null) {
 					$ubah_data = User::where('id_user',Auth()->user()->id_user)->update([
 						'name' => $request->name,

@@ -13,6 +13,9 @@
                             <p class="card-text" id="hasilkep"></p>
                             <p class="card-text" id="hasildes"></p>
                         </div>
+                        <div class="card-footer">
+                            <a href="{{url('cetak')}}" target="_blank" class="btn btn-sm btn-info">DOWNLOAD HASIL</a>
+                        </div>
                     </div>
                     <div id="hasil-belum">
                         <p class="card-text"> HASIL BELUM BISA DITAMPILKAN </p>
@@ -77,7 +80,7 @@
                     }
                     if ($('#hasildes').html()!="<b>"+data.deskripsi+"</b>") {
                         $('#hasildes').empty();
-                        $('#hasildes').append("<b>"+data.deskripsi+"</b>");
+                        $('#hasildes').append(data.deskripsi);
                     }
                     // console.log('endif');
                     // console.log(data_type);

@@ -7,12 +7,121 @@ use App\Models\Hasil;
 use App\Models\User;
 use App\Models\Jawaban;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function admin()
     {
     	return view('v_admin.admin');
+    }
+
+    public function data()
+    {   
+        if (Auth()->User()->role!='Admin') {
+            return redirect('index');
+        }
+        // dd(User::where('role','=','Admin')->where('id_user','!=',Auth()->user()->id_user)->get());
+        $data = array();
+        foreach(User::where('role','=','Admin')->where('id_user','!=',Auth()->user()->id_user)->get() as $hasil){
+            array_push($data,[
+                'name' => $hasil->name,
+                'email' => $hasil->email,
+                'id_user' => $hasil->id_user,
+            ]);
+        }
+        if (request()->ajax()) {
+            return DataTables::of($data)->make(true);
+        }
+        return view('v_admin.dataadmin');
+    }
+    public function add()
+    {
+        if (Auth()->User()->role!='Admin') {
+            return redirect('index');
+        }
+        if (request()->name&&request()->email&&request()->password) {
+            dd(request());
+        }
+        return view('v_admin.add');
+    }
+    public function padd(Request $request)
+    {
+        if (Auth()->User()->role!='Admin') {
+            return redirect('index');
+        }
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users',
+            'password' => 'required|max:255',
+        ]);
+
+        $data = User::create([
+            'name' =>$request->name,
+            'email' =>$request->email,
+            'password' =>Hash::make($request->password),
+            'role' =>'Admin',
+        ]);
+        // dd($data);
+        return redirect('data');
+    }
+    public function ubahdata($id)
+    {
+        if (Auth()->User()->role!='Admin') {
+            return redirect('index');
+        }
+        $data = [
+            'user' => User::find($id),
+        ];
+        return view('v_admin.update',compact('data'));
+    }
+    public function pubahdata(Request $request,$id)
+    {
+        // dd($request);
+        if ($request->name!=null&&$request->email!=null) {
+            if ($request->password==null) {
+                $ubah_data = User::where('id_user',$id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                ]);
+                if ($ubah_data) {
+                    return redirect('data/ubah/'.$id)->with('sukses','data sudahh diubah');
+                }
+                else{
+                    return redirect('data/ubah/'.$id)->with('gagal','data gagal diubah');
+                }
+            }
+            if ($request->password!=null) {
+                $ubah_data = User::where('id_user',$id)->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                ]);
+                if ($ubah_data) {
+                    return redirect('data/ubah/'.$id)->with('sukses','data sudahh diubah');
+                }
+                else{
+                    return redirect('data/ubah/'.$id)->with('gagal','data gagal diubah');
+                }
+            }
+
+        }
+        else{
+            return redirect('data/ubah/'.$id);
+        }
+    }
+    public function deletedata($id)
+    {
+        $delete_user = User::where('id_user','=',$id)->delete();
+        DB::statement('alter table users auto_increment=0');
+        if ($delete_user) {
+            return redirect('data')->with('sukses','data sudahh dihapus');
+        }
+        else{
+            return redirect('data')->with('gagal','data gagal dihapus');
+        }
     }
 
     public function tesrekap()
@@ -22,6 +131,7 @@ class AdminController extends Controller
             foreach(Hasil::all() as $hasil){
                 array_push($data,[
                     'id_users' => User::find($hasil->id_users)->name,
+                    'tgl' => DATE('d/m/Y',strtotime($hasil->created_at)),
                     'jawaban' => $this->kepribadian($hasil->jawaban),
                 ]);
             }

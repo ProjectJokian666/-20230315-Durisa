@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="{{url('index')}}">
-                <span>MBTI</h1><h6 style="line-height: 0px">foryourself @auth {{Auth()->User()->name}} @endauth</h6></span>
+                <span>MBTI</h1><h6 style="line-height: 0px">foryourself</h6></span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,6 +29,9 @@
                             </li>
                         <?php }
                         if (Auth()->User()->role=='Admin') { ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{url('data')}}">Data Admin</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{url('tesrekap')}}">Rekap Tes</a>
                             </li>
