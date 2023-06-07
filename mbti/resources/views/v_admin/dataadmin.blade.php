@@ -14,6 +14,18 @@
 </div>
 <!-- item section -->
 <div class="price_section layout_padding2">
+    @if(session('sukses'))
+    <div class="container" id="alert-data">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="alert alert-success">
+                    {{session('sukses')}}
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    @endif
     <div class="container">
         <div class="heading_container">
             <h2>
@@ -45,6 +57,10 @@
 <script src="{{asset('asset/datatables/jquery.dataTables.min.js')}}"></script>
 <link  href="{{asset('asset/datatables/jquery.dataTables.min.css')}}" rel="stylesheet">
 <script>
+    setInterval(
+        function () {
+            $('#alert-data').hide();
+        }, 3000);
     $(document).ready(function(){
       $('#data').DataTable({
         processing: true,

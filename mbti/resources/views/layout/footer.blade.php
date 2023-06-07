@@ -6,7 +6,7 @@
                     <div class="info_logo">
                         <a href="{{url('index')}}">
                             <span>
-                                MBTI-FYS
+                                FYP
                             </span>
                         </a>
                     </div>

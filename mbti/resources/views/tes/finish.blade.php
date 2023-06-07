@@ -14,7 +14,7 @@
                             <p class="card-text" id="hasildes"></p>
                         </div>
                         <div class="card-footer">
-                            <a href="{{url('cetak')}}" target="_blank" class="btn btn-sm btn-info">DOWNLOAD HASIL</a>
+                            <a href="{{url('cetak')}}" target="_blank" class="btn btn-sm btn-info text-white">DOWNLOAD HASIL</a>
                         </div>
                     </div>
                     <div id="hasil-belum">

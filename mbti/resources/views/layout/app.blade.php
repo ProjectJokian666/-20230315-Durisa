@@ -13,7 +13,7 @@
     <meta name="author" content="" />
 
     <title>
-        MBTI-FYS
+        MBTI-FYP
         @if(Auth::check())
         {{Auth::user()->name}}
         @endif

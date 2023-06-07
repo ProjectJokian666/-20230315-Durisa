@@ -87,7 +87,7 @@ class AdminController extends Controller
                     'email' => $request->email,
                 ]);
                 if ($ubah_data) {
-                    return redirect('data/ubah/'.$id)->with('sukses','data sudahh diubah');
+                    return redirect('data')->with('sukses','data sudah diubah');
                 }
                 else{
                     return redirect('data/ubah/'.$id)->with('gagal','data gagal diubah');
@@ -100,7 +100,7 @@ class AdminController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
                 if ($ubah_data) {
-                    return redirect('data/ubah/'.$id)->with('sukses','data sudahh diubah');
+                    return redirect('data')->with('sukses','data sudah diubah');
                 }
                 else{
                     return redirect('data/ubah/'.$id)->with('gagal','data gagal diubah');

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="{{url('index')}}">
-                <span>MBTI</h1><h6 style="line-height: 0px">foryourself</h6></span>
+                <span>FORYOUR</h1><h6 style="line-height: 0px">PERSONALITY</h6></span>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

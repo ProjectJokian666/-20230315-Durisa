@@ -74,6 +74,7 @@
 							<div class="text-center">
 								<p class="card-title">HASIL TES ANDA</p>
 								<p class="card-text"> BELUM BISA DITAMPILKAN </p>
+								<a href="{{url('teskepribadian')}}" class="btn btn-info">TES KEPRIBADIAN</a>
 							</div>
 						</div>
 					</div>
@@ -116,7 +117,7 @@
 					}
 				}
 			});
-		},1000);
+		},1);
 
 		function hasil() {
 			$.ajax({
@@ -141,8 +142,28 @@
 							$('#hasildes').append(data.deskripsi);
 						}
 					}
-
-					window.print();
+					if ($('#hasilimg').attr('src')) {
+						setInterval(function () {
+							window.print()
+						},1000)
+						// console.log($('#hasilimg').attr('src'));
+					}
+					// console.log("{{asset('images')}}"+"/"+data.gambar);
+					// const data_file = "{{asset('images')}}"+"/"+data.gambar;
+					// fetch(data_file)
+					// .then(response=>{
+					// 	if (response.ok) {
+					// 		windows.print()
+					// 	}
+					// 	else{
+					// 		console.log('aaa')
+					// 		hasil();
+					// 	}
+					// })
+					// .catch(error=>{
+					// 	console.log()
+					// 	hasil();
+					// });
 				}
 			})
 		}
