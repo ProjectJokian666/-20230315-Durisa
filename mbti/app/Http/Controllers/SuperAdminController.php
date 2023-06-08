@@ -85,7 +85,7 @@ class SuperAdminController extends Controller
                     'email' => $request->email,
                 ]);
                 if ($ubah_data) {
-                    return redirect('dataadmin/ubah/'.$id)->with('sukses','data sudahh diubah');
+                    return redirect('dataadmin')->with('sukses','data sudahh diubah');
                 }
                 else{
                     return redirect('dataadmin/ubah/'.$id)->with('gagal','data gagal diubah');
@@ -98,7 +98,7 @@ class SuperAdminController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
                 if ($ubah_data) {
-                    return redirect('dataadmin/ubah/'.$id)->with('sukses','data sudahh diubah');
+                    return redirect('dataadmin')->with('sukses','data sudahh diubah');
                 }
                 else{
                     return redirect('dataadmin/ubah/'.$id)->with('gagal','data gagal diubah');

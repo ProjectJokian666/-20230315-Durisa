@@ -14,6 +14,18 @@
 </div>
 <!-- item section -->
 <div class="price_section layout_padding2">
+    @if(session('sukses'))
+    <div class="container" id="alert-data">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="alert alert-success">
+                    {{session('sukses')}}
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    @endif
     <div class="container">
         <div class="heading_container">
             <h2>
