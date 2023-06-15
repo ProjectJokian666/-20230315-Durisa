@@ -131,6 +131,7 @@ class AdminController extends Controller
             foreach(Hasil::all() as $hasil){
                 array_push($data,[
                     'id_users' => User::find($hasil->id_users)->name,
+                    'email' => User::find($hasil->id_users)->email,
                     'tgl' => DATE('d/m/Y',strtotime($hasil->created_at)),
                     'jawaban' => $this->kepribadian($hasil->jawaban),
                 ]);

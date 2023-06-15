@@ -25,6 +25,7 @@
                 <thead>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>Email</th>
                     <th>Tgl Tes</th>
                     <th>Hasil</th>
                 </thead>
@@ -54,6 +55,7 @@
             } 
         },
         { data: 'id_users', name: 'id_users' },
+        { data: 'email', name: 'email' },
         { data: 'tgl', name: 'tgl' },
         { data: 'jawaban', name: 'jawaban' },
         ]

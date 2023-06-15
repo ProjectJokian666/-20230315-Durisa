@@ -7,7 +7,7 @@
                 </div>
                 <div class="card-footer">
                     <div id="hasil-ada">
-                        <img src="" class="card-img-top" alt="" id="hasilimg">
+                        <img src="" class="card-img-top" alt="" id="hasilimg" style="width:20px">
                         <div class="card-body">
                             <h5 class="card-title" id="hasiltype"></h5>
                             <p class="card-text" id="hasilkep"></p>
